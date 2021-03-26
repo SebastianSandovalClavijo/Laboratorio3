@@ -19,6 +19,8 @@ public class Mensaje extends javax.swing.JFrame {
     ImageIcon Imagen[] = new ImageIcon[12];
     int contador = 1;
     Timer tiempo;
+    int velocidad;
+    boolean revision;
 
     /**
      * Creates new form Mensaje
@@ -45,110 +47,165 @@ public class Mensaje extends javax.swing.JFrame {
         Visor = new javax.swing.JLabel();
         BthAnterior = new javax.swing.JButton();
         BthSiguiente = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BtnAutomatico = new javax.swing.JButton();
+        Teclado = new javax.swing.JTextField();
+        Slider = new javax.swing.JSlider();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Visor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Visor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 5, true));
+        getContentPane().add(Visor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 260, 200));
 
+        BthAnterior.setBackground(new java.awt.Color(0, 153, 153));
         BthAnterior.setText("Anterior");
+        BthAnterior.setMaximumSize(new java.awt.Dimension(83, 23));
+        BthAnterior.setMinimumSize(new java.awt.Dimension(83, 23));
         BthAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BthAnteriorActionPerformed(evt);
             }
         });
+        getContentPane().add(BthAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 90, -1));
 
         BthSiguiente.setText("Siguiente");
+        BthSiguiente.setMaximumSize(new java.awt.Dimension(87, 23));
+        BthSiguiente.setMinimumSize(new java.awt.Dimension(87, 23));
         BthSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BthSiguienteActionPerformed(evt);
             }
         });
+        getContentPane().add(BthSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 90, -1));
 
-        jButton3.setText("Automatico");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        BtnAutomatico.setText("Automatico");
+        BtnAutomatico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                BtnAutomaticoActionPerformed(evt);
             }
         });
+        getContentPane().add(BtnAutomatico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 90, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(Visor, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(BthAnterior)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addGap(66, 66, 66)
-                        .addComponent(BthSiguiente)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(Visor, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BthAnterior)
-                    .addComponent(BthSiguiente)
-                    .addComponent(jButton3))
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
+        Teclado.setBackground(new java.awt.Color(0, 153, 153));
+        Teclado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Teclado.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Teclado.setMaximumSize(new java.awt.Dimension(87, 27));
+        Teclado.setMinimumSize(new java.awt.Dimension(87, 27));
+        Teclado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TecladoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Teclado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 248, 110, 20));
+
+        Slider.setBackground(new java.awt.Color(0, 153, 153));
+        Slider.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        Slider.setMajorTickSpacing(50);
+        Slider.setMaximum(500);
+        Slider.setPaintLabels(true);
+        Slider.setPaintTicks(true);
+        Slider.setValue(0);
+        Slider.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        Slider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SliderStateChanged(evt);
+            }
+        });
+        getContentPane().add(Slider, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 210, 40));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/visordeimagenes/Imagenes/Fondo.jpg"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 270));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BthSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BthSiguienteActionPerformed
         // TODO add your handling code here:
+
+        if (revision == true) {
+
+            tiempo.setCoalesce(true);
+            tiempo.stop();
+
+        }
         if (contador == 10) {
             contador = 0;
-            
+
         }
         contador++;
-        Visor.setIcon(Imagen[contador]);
+        if (contador >= 12) {
+            contador = Imagen.length - 11;
+            Visor.setIcon(Imagen[contador]);
+        } else {
+            Visor.setIcon(Imagen[contador]);
+        }
+
 
     }//GEN-LAST:event_BthSiguienteActionPerformed
 
     private void BthAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BthAnteriorActionPerformed
         // TODO add your handling code here:
-        if (contador == 1) {
+
+        if (revision == true) {
+
+            tiempo.setCoalesce(true);
+            tiempo.stop();
+        }
+        if (contador == 1) {//si
             contador = 11;
 
         }
-        contador--;
-        Visor.setIcon(Imagen[contador]);
+        contador--;//10
+        if (contador <= 0) {
+            contador = Imagen.length - 1;
+            Visor.setIcon(Imagen[contador]);
+        } else {
+
+            Visor.setIcon(Imagen[contador]);
+
+        }
 
 
     }//GEN-LAST:event_BthAnteriorActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        tiempo = new Timer(600, new ActionListener() {//Retraso 600
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Visor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/visordeimagenes/Imagenes/ima" + contador + ".jpg")));
-                contador++;
-                if (contador == 11) {
-                    contador = 1;
-                }
-                {
+    private void BtnAutomaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAutomaticoActionPerformed
+        revision = true;
+        tiempo = new Timer(velocidad, new ActionListener() {//Retraso 600
 
+            ;
+            @Override
+            public void actionPerformed(ActionEvent e) {//500
+
+                Visor.setIcon(Imagen[contador]);
+                contador++;//11
+                if (contador == (Imagen.length - 1)) {//11
+                    contador = 1;
                 }
 
             }
+
         });
+
+        tiempo.setInitialDelay(0);
         tiempo.start();
-    }//GEN-LAST:event_jButton3ActionPerformed
+
+
+    }//GEN-LAST:event_BtnAutomaticoActionPerformed
+
+    private void TecladoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TecladoActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_TecladoActionPerformed
+
+    private void SliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderStateChanged
+        // TODO add your handling code here:
+        Teclado.setText(String.valueOf(Slider.getValue()));
+        velocidad = Integer.parseInt(Teclado.getText());
+
+
+    }//GEN-LAST:event_SliderStateChanged
 
     /**
      * @param args the command line arguments
@@ -179,7 +236,9 @@ public class Mensaje extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
+
                 new Mensaje().setVisible(true);
             }
         });
@@ -188,7 +247,10 @@ public class Mensaje extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BthAnterior;
     private javax.swing.JButton BthSiguiente;
+    private javax.swing.JButton BtnAutomatico;
+    private javax.swing.JSlider Slider;
+    private javax.swing.JTextField Teclado;
     public static javax.swing.JLabel Visor;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

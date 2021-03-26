@@ -42,7 +42,7 @@ public class Laboratorio3 {
             System.out.println("Error de digitacion de alarma");
         }
         int contador;
-        System.out.println("Cual es la velocidad que decea (seg)");
+        System.out.println("Cual es la velocidad que desea (s)");
         contador = teclado.nextInt();
         int contador1 = contador * 1000;
 
@@ -53,7 +53,7 @@ public class Laboratorio3 {
             public void run() {//Aqui se coloca lo que queremos que haga nuestro programa
                 MiTimer envio = new MiTimer(hora, minutos, segundos, horario);
                 System.out.println(envio.getHora() + ":" + envio.getMinutos() + ":" + envio.getSegundos() + ":" + envio.getHorario());
-                envio.getSegundos()+contador;
+                envio.getSegundos()+contador;//valor temporal
             }
 
         };
